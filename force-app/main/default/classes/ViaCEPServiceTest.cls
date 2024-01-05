@@ -6,7 +6,12 @@
 public class ViaCEPServiceTest {
 
     public static final String MOCK_SP = '{"cep": "01002-020","logradouro": "Viaduto do Chá", "complemento": "", "bairro": "Centro", "localidade": "São Paulo", "uf": "SP"}';
-    public static final String MOCK_2_RECIFE = '{"cep": "50030-903","logradouro": "Cais do Apolo", "complemento": "925", "bairro": "Centro", "localidade": "Recife", "uf": "PE"}';
+    public static final String MOCK_RECIFE = '{"cep": "50030-903","logradouro": "Cais do Apolo", "complemento": "925", "bairro": "Centro", "localidade": "Recife", "uf": "PE"}';
+    public static final String MOCK_POA = '{"cep": "90010-030","logradouro": "Rua General João Manoel", "complemento": "925", "bairro": "Centro Histórico", "localidade": "Porto Alegre", "uf": "RS"}';
+
+    public static final String CEP_SP = '01002020';
+    public static final String CEP_RECIFE = '50030903';
+    public static final String CEP_POA = '90010030';    
 
     @isTest
     static void testQueryOKOnly1Call() 

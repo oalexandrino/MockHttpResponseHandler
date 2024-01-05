@@ -4,7 +4,7 @@ public with sharing class MockHttpResponseHandlerTest
     @isTest 
     static void testSimpleCall() 
     {
-        String URL_MOCK_SP = 'https://viacep.com.br/ws/01002020/json/';
+        String URL_MOCK_SP = 'https://viacep.com.br/ws/'+ViaCEPServiceTest.CEP_SP+'/json/';
 
         MockHttpResponseHandler mock = new MockHttpResponseHandler();
 
@@ -16,7 +16,7 @@ public with sharing class MockHttpResponseHandlerTest
         Test.startTest();
 
             Test.setMock(HttpCalloutMock.class, mock);
-            HttpResponse res = ViaCEPService.query('01002020');
+            HttpResponse res = ViaCEPService.query(ViaCEPServiceTest.CEP_SP);
             Map<String, Object> result = ViaCEPService.format(res);     
 
         Test.stopTest();

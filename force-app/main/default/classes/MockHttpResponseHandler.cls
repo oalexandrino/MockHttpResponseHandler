@@ -10,10 +10,14 @@
  */
 global class MockHttpResponseHandler implements HttpCalloutMock {
 
-    //Each endpoint gets a ResponseEndpointHandler that stores a list of responses for each method
+    /**
+     * @description Each endpoint gets a ResponseEndpointHandler that stores a list of responses for each method
+     */
     private Map<String,ResponseEndpointHolder> responseMap = new Map<String,ResponseEndpointHolder>();
 
-    //This causes the ? query params to be ignored when routing responses
+    /**
+     * @description This causes the ? query params to be ignored when routing responses
+     */
     public Boolean ignoreQuery {get; set;}
 
     public MockHttpResponseHandler(){
@@ -38,11 +42,9 @@ global class MockHttpResponseHandler implements HttpCalloutMock {
     global HTTPResponse respond(HTTPRequest req) {
         String endpoint = req.getEndpoint();
        
-
         if(ignoreQuery){
             endpoint = getBaseUrl(endpoint);
         }
-        System.debug('endpoint: '+ endpoint);
         if(!responseMap.containsKey(endpoint)){
             throw new MockHttpHandlerException('No response for endpoint:' + endpoint);
         }
