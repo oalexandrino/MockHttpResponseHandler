@@ -3,6 +3,7 @@
     <types>
         <members>IMockResponse</members>
         <members>MockResponse</members>
+        <members>MockResponseTest</members>
         <members>ResponseEndpointHolder</members>
         <members>HttpCalloutMockException</members>
         <members>MockHttpResponseHandler</members>
