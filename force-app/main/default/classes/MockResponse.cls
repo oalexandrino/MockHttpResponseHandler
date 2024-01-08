@@ -16,10 +16,20 @@ public virtual class MockResponse implements IMockResponse{
     private String status;
     private Map<String, String> headers {get; set;}    
 
+    /**
+     * Returns the HTTP method of the request.
+     * 
+     * @return The HTTP method of the request.
+     */
     public String getMethod(){
         return method;
     }
 
+    /**
+     * Sets the HTTP method for the mock response.
+     * 
+     * @param value The HTTP method to set.
+     */
     public void setMethod(String value){
         this.method = value;
     }

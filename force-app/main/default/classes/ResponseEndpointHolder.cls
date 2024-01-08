@@ -14,6 +14,7 @@ public class ResponseEndpointHolder {
      * @param responses The list of mock responses to validate.
      * @param method The HTTP method for which the responses are being validated.
      */
+    @TestVisible
     private void validateResponses(List<IMockResponse> responses, String method) {
         if (responses == null || responses.isEmpty()) {
             throw new HttpCalloutMockException('No response for method: ' + method);
@@ -29,6 +30,7 @@ public class ResponseEndpointHolder {
      * @param oHTTPRequest The HTTPRequest object.
      * @return The HTTPResponse object.
      */
+    @TestVisible
     private HTTPResponse getResponse(List<IMockResponse> responses, HTTPRequest oHTTPRequest)
     {
         return (responses.size() == 1) ? responses[0].getResponse(oHTTPRequest) : responses.remove(0).getResponse(oHTTPRequest);
