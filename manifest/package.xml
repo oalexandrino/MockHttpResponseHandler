@@ -4,7 +4,7 @@
         <members>IMockResponse</members>
         <members>SimpleMockResponse</members>
         <members>ResponseEndpointHolder</members>
-        <members>MockHttpHandlerException</members>
+        <members>HttpCalloutMockException</members>
         <members>MockHttpResponseHandler</members>
         <members>MockHttpResponseHandlerTest</members>
         <members>ViaCEPService</members>

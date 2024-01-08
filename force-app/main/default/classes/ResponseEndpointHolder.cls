@@ -15,7 +15,7 @@ public class ResponseEndpointHolder {
      */
     private void validateResponses(List<IMockResponse> responses, String method) {
         if (responses == null || responses.isEmpty()) {
-            throw new MockHttpHandlerException('No response for method:' + method);
+            throw new HttpCalloutMockException('No response for method:' + method);
         }
     }
 
@@ -28,7 +28,9 @@ public class ResponseEndpointHolder {
     public HTTPResponse respond(HTTPRequest req) {
         HTTPResponse response;
         String method = req.getMethod();
+        System.debug('responding the follwing method:' + method);
         List<IMockResponse> responses = endpointMethodMap.get(method);
+        System.debug('endpointMethodMap.size():' + endpointMethodMap.size());
         
         validateResponses(responses, method);
 
@@ -37,6 +39,8 @@ public class ResponseEndpointHolder {
         } else {
             response = responses.remove(0).getResponse(req);
         }
+
+        System.debug('response.getBody():' + response.getBody());
         return response;
     }
 
@@ -48,7 +52,7 @@ public class ResponseEndpointHolder {
     public void addResponse(IMockResponse response) {
         String method = response.getMethod();
         if (method == null) {
-            throw new MockHttpHandlerException('Method cannot be null!');
+            throw new HttpCalloutMockException('Method cannot be null!');
         }
 
         if (endpointMethodMap.containsKey(method)) {
