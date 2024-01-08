@@ -1,6 +1,6 @@
 /**
  * @description Interface used for MockReponses. Implement this if you need a specialized Mock Response
- * @author Olavo Alexandrino <olavo.barbosa@vr.com.br>
+ * @author Olavo Alexandrino <oalexandrino@gmail.com>
  * @param  HTTPRequest req 
  * @return String
  */
