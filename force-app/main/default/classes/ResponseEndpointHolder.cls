@@ -2,6 +2,7 @@
  * This class represents a holder for mapping endpoint URLs to a list of mock responses.
  * Endpoint Handler is used to store a list of reponses for each HTTP method on an endpoint 
  */
+@isTest
 public class ResponseEndpointHolder {
 
     private Map<String, List<IMockResponse>> endpointMethodMap = new Map<String, List<IMockResponse>>();

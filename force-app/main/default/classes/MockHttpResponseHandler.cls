@@ -8,6 +8,7 @@
  *      See https://github.com/ChuckJonas/MockHttpResponseHandler for updates.
  *      v1.2
  */
+@isTest
 global class MockHttpResponseHandler implements HttpCalloutMock {
 
     /**
