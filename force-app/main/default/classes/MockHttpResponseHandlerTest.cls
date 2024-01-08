@@ -6,8 +6,8 @@ public with sharing class MockHttpResponseHandlerTest
     {
         String URL_MOCK_SP = 'https://viacep.com.br/ws/'+ViaCEPServiceTest.CEP_SP+'/json/';
         MockHttpResponseHandler mock = new MockHttpResponseHandler();
-        SimpleMockResponse oSimpleMockResponse = new SimpleMockResponse('GET', ViaCEPServiceTest.MOCK_SP, 200, 'OK');
-        mock.addResponse(URL_MOCK_SP, oSimpleMockResponse);
+        MockResponse oMockResponse = new MockResponse('GET', ViaCEPServiceTest.MOCK_SP, 200, 'OK');
+        mock.addResponse(URL_MOCK_SP, oMockResponse);
 
         Test.startTest();
 

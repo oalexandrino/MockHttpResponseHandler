@@ -11,15 +11,15 @@ public with sharing class ChainCEPCallsTest {
         MockHttpResponseHandler mock = new MockHttpResponseHandler();
 
         //going to run this one twice...
-        SimpleMockResponse oSimpleMockResponseSP = new SimpleMockResponse('GET', ViaCEPServiceTest.MOCK_SP, 200, 'OK');
-        SimpleMockResponse oSimpleMockResponseRECIFE = new SimpleMockResponse('GET', ViaCEPServiceTest.MOCK_RECIFE, 200, 'OK');
-        SimpleMockResponse oSimpleMockResponsePOA = new SimpleMockResponse('GET', ViaCEPServiceTest.MOCK_POA, 200, 'OK');
-        SimpleMockResponse oSimpleMockResponseBH = new SimpleMockResponse('GET', ViaCEPServiceTest.MOCK_BH, 200, 'OK');
+        MockResponse oMockResponseSP = new MockResponse('GET', ViaCEPServiceTest.MOCK_SP, 200, 'OK');
+        MockResponse oMockResponseRECIFE = new MockResponse('GET', ViaCEPServiceTest.MOCK_RECIFE, 200, 'OK');
+        MockResponse oMockResponsePOA = new MockResponse('GET', ViaCEPServiceTest.MOCK_POA, 200, 'OK');
+        MockResponse oMockResponseBH = new MockResponse('GET', ViaCEPServiceTest.MOCK_BH, 200, 'OK');
 
-        mock.addResponse(URL_MOCK_SP, oSimpleMockResponseSP);
-        mock.addResponse(URL_MOC_RECIFE, oSimpleMockResponseRECIFE);
-        mock.addResponse(URL_MOCK_POA, oSimpleMockResponsePOA);
-        mock.addResponse(URL_MOCK_BH, oSimpleMockResponseBH);
+        mock.addResponse(URL_MOCK_SP, oMockResponseSP);
+        mock.addResponse(URL_MOC_RECIFE, oMockResponseRECIFE);
+        mock.addResponse(URL_MOCK_POA, oMockResponsePOA);
+        mock.addResponse(URL_MOCK_BH, oMockResponseBH);
 
         Test.startTest();
 

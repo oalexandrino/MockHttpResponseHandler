@@ -2,7 +2,7 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>IMockResponse</members>
-        <members>SimpleMockResponse</members>
+        <members>MockResponse</members>
         <members>ResponseEndpointHolder</members>
         <members>HttpCalloutMockException</members>
         <members>MockHttpResponseHandler</members>

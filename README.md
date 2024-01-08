@@ -1,4 +1,4 @@
-# MockHttpResponseHandler, ResponseEndpointHolder, SimpleMockResponse and IMockResponse
+# MockHttpResponseHandler, ResponseEndpointHolder, MockResponse and IMockResponse
 
 An Apex a utility class to help test HTTP callouts (Salesforce).
 This is an extension of MockHttpResponseHandler coded by @ChuckJonas
@@ -11,7 +11,7 @@ This is an extension of MockHttpResponseHandler coded by @ChuckJonas
 
 ## Usage
 
-### SimpleMockResponse
+### MockResponse
 
 
 

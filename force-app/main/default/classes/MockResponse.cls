@@ -1,7 +1,8 @@
 /**
  * Base class that covers most simple use cases
+ * Implement another version by extending it or a new class that implements IMockResponse, if you need a specialized Mock Response
  */
-public virtual class SimpleMockResponse implements IMockResponse{
+public virtual class MockResponse implements IMockResponse{
 
     public static final Integer DEFAULT_STATUS_CODE = 200;
     public static final String DEFAULT_STATUS = 'OK';
@@ -23,12 +24,12 @@ public virtual class SimpleMockResponse implements IMockResponse{
     }
 
     /**
-     * Constructor for the SimpleMockResponse class.
+     * Constructor for the MockResponse class.
      * 
      * @param method The HTTP method for the mock response.
      * @param body The body of the mock response.
      */
-    public SimpleMockResponse(String method, String body){
+    public MockResponse(String method, String body){
         this.headers = new Map<String, String>();
         this.method = method;
         this.body = body;
@@ -38,14 +39,14 @@ public virtual class SimpleMockResponse implements IMockResponse{
     }      
 
     /**
-     * Constructor for creating a SimpleMockResponse object.
+     * Constructor for creating a MockResponse object.
      * 
      * @param method The HTTP method for which the mock response is being created.
      * @param body The response body for the mock response.
      * @param statusCode The HTTP status code for the mock response.
      * @param status The HTTP status message for the mock response.
      */
-    public SimpleMockResponse(String method, String body, Integer statusCode, String status){
+    public MockResponse(String method, String body, Integer statusCode, String status){
         this.method = method;
         this.body   = body;
         this.statusCode = statusCode;
@@ -55,7 +56,7 @@ public virtual class SimpleMockResponse implements IMockResponse{
     }       
 
     /**
-     * Constructor for creating a SimpleMockResponse object.
+     * Constructor for creating a MockResponse object.
      * 
      * @param method The HTTP method for the mock response.
      * @param body The response body for the mock response.
@@ -64,7 +65,7 @@ public virtual class SimpleMockResponse implements IMockResponse{
      * @param contentType The content type for the mock response.
      * @param headers The headers for the mock response.
      */
-    public SimpleMockResponse(String method, String body, Integer statusCode, String status,  String contentType, Map<String, String> headers){
+    public MockResponse(String method, String body, Integer statusCode, String status,  String contentType, Map<String, String> headers){
         this.method = method;
         this.body   = body;
         this.statusCode = statusCode;
@@ -79,7 +80,7 @@ public virtual class SimpleMockResponse implements IMockResponse{
      * @param oHTTPRequest The HTTP request for which the response is needed.
      * @return The HTTP response.
      */
-    public HTTPResponse getResponse(HTTPRequest oHTTPRequest) {
+    public virtual HTTPResponse getResponse(HTTPRequest oHTTPRequest) {
 
         this.checkRequestProperties();
 
@@ -106,7 +107,7 @@ public virtual class SimpleMockResponse implements IMockResponse{
      * 
      * @param oHTTPRequest The HTTP request to be checked.
      */
-    private void checkRequestProperties()
+    public virtual void checkRequestProperties()
     {
         if (this.contentType == null)
         {
