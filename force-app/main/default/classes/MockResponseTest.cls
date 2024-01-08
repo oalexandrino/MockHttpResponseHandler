@@ -5,56 +5,59 @@
 @isTest
 public class MockResponseTest {
 
-    public static final String RESPONSE_GET_METHOD = 'GET';
-    public static final String RESPONSE_POST = 'POST';
-    public static final String RESPONSE_BODY = 'Mock Body';
-    public static final Integer RESPONSE_STATUS_CODE = 200;
-    public static final String RESPONSE_STATUS = 'OK';
-    public static final String CONTENT_TYPE = 'application/json';    
-    public static final Map<String, String> RESPONSE_HEADERS = new Map<String, String>{'Header1' => 'Value1'};    
-    public static final String HEADERS_VALUE = 'Value1';    
-
     @isTest
     static void testGetResponseAndSetMethod() {
 
         Test.startTest();
 
             HTTPRequest httpRequest = new HTTPRequest();
-            httpRequest.setMethod(RESPONSE_GET_METHOD);        
+            httpRequest.setMethod(MockResponseDataFactory.RESPONSE_GET_METHOD);        
 
-            MockResponse mockResponse1 = new MockResponse(RESPONSE_GET_METHOD, RESPONSE_BODY);
-            mockResponse1.setMethod(RESPONSE_GET_METHOD);
+            MockResponse mockResponse1 = MockResponseDataFactory.getDefaultMockResponse();
+            mockResponse1.setMethod(MockResponseDataFactory.RESPONSE_GET_METHOD);
             HTTPResponse httpResponse1 = mockResponse1.getResponse(httpRequest);    
 
-            MockResponse mockResponse2 = new MockResponse(RESPONSE_GET_METHOD, RESPONSE_BODY, RESPONSE_STATUS_CODE, RESPONSE_STATUS);
+            MockResponse mockResponse2 = new MockResponse(
+                MockResponseDataFactory.RESPONSE_GET_METHOD, 
+                MockResponseDataFactory.RESPONSE_BODY, 
+                MockResponseDataFactory.RESPONSE_STATUS_CODE, 
+                MockResponseDataFactory.RESPONSE_STATUS
+            );
             HTTPResponse httpResponse2 = mockResponse2.getResponse(httpRequest);
 
-            MockResponse mockResponse3 = new MockResponse(RESPONSE_POST, RESPONSE_BODY, RESPONSE_STATUS_CODE, RESPONSE_STATUS, CONTENT_TYPE, RESPONSE_HEADERS);
-            mockResponse3.setMethod(RESPONSE_POST);        
+            MockResponse mockResponse3 = new MockResponse(
+                MockResponseDataFactory.RESPONSE_POST, 
+                MockResponseDataFactory.RESPONSE_BODY, 
+                MockResponseDataFactory.RESPONSE_STATUS_CODE, 
+                MockResponseDataFactory.RESPONSE_STATUS, 
+                MockResponseDataFactory.CONTENT_TYPE, 
+                MockResponseDataFactory.RESPONSE_HEADERS
+            );
+            mockResponse3.setMethod(MockResponseDataFactory.RESPONSE_POST);        
             HTTPResponse httpResponse3 = mockResponse3.getResponse(httpRequest);    
 
         Test.stopTest();
 
-        System.assertEquals(RESPONSE_BODY, httpResponse1.getBody(), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.RESPONSE_BODY, httpResponse1.getBody(), 'Message if assertion fails');
         System.assertEquals(200, httpResponse1.getStatusCode(), 'Message if assertion fails');
-        System.assertEquals(RESPONSE_STATUS, httpResponse1.getStatus(), 'Message if assertion fails');
-        System.assertEquals(CONTENT_TYPE, httpResponse1.getHeader('Content-Type'), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.RESPONSE_STATUS, httpResponse1.getStatus(), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.CONTENT_TYPE, httpResponse1.getHeader('Content-Type'), 'Message if assertion fails');
         System.assertEquals(null, httpResponse1.getHeader('Header1'), 'Message if assertion fails');
-        System.assertEquals(RESPONSE_GET_METHOD, mockResponse1.getMethod(), 'Must be ' +RESPONSE_GET_METHOD);
+        System.assertEquals(MockResponseDataFactory.RESPONSE_GET_METHOD, mockResponse1.getMethod(), 'Must be ' +MockResponseDataFactory.RESPONSE_GET_METHOD);
 
-        System.assertEquals(RESPONSE_BODY, httpResponse2.getBody(), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.RESPONSE_BODY, httpResponse2.getBody(), 'Message if assertion fails');
         System.assertEquals(200, httpResponse2.getStatusCode(), 'Message if assertion fails');
-        System.assertEquals(RESPONSE_STATUS, httpResponse2.getStatus(), 'Message if assertion fails');
-        System.assertEquals(CONTENT_TYPE, httpResponse2.getHeader('Content-Type'), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.RESPONSE_STATUS, httpResponse2.getStatus(), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.CONTENT_TYPE, httpResponse2.getHeader('Content-Type'), 'Message if assertion fails');
         System.assertEquals(null, httpResponse2.getHeader('Header1'), 'Message if assertion fails');
-        System.assertEquals(RESPONSE_GET_METHOD, mockResponse2.getMethod(), 'Must be ' +RESPONSE_GET_METHOD);
+        System.assertEquals(MockResponseDataFactory.RESPONSE_GET_METHOD, mockResponse2.getMethod(), 'Must be ' +MockResponseDataFactory.RESPONSE_GET_METHOD);
         
-        System.assertEquals(RESPONSE_BODY, httpResponse3.getBody(), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.RESPONSE_BODY, httpResponse3.getBody(), 'Message if assertion fails');
         System.assertEquals(200, httpResponse3.getStatusCode(), 'Message if assertion fails');
-        System.assertEquals(RESPONSE_STATUS, httpResponse3.getStatus(), 'Message if assertion fails');
-        System.assertEquals(CONTENT_TYPE, httpResponse3.getHeader('Content-Type'), 'Message if assertion fails');
-        System.assertEquals(HEADERS_VALUE, httpResponse3.getHeader('Header1'), 'Message if assertion fails');   
-        System.assertEquals(RESPONSE_POST, mockResponse3.getMethod(), 'Must be ' +RESPONSE_POST);     
+        System.assertEquals(MockResponseDataFactory.RESPONSE_STATUS, httpResponse3.getStatus(), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.CONTENT_TYPE, httpResponse3.getHeader('Content-Type'), 'Message if assertion fails');
+        System.assertEquals(MockResponseDataFactory.HEADERS_VALUE, httpResponse3.getHeader('Header1'), 'Message if assertion fails');   
+        System.assertEquals(MockResponseDataFactory.RESPONSE_POST, mockResponse3.getMethod(), 'Must be ' +MockResponseDataFactory.RESPONSE_POST);     
     }
 
     @isTest
@@ -62,9 +65,9 @@ public class MockResponseTest {
 
         Test.startTest();
 
-            MockResponse mockResponse1 = new MockResponse(RESPONSE_GET_METHOD, RESPONSE_BODY);
-            MockResponse mockResponse2 = new MockResponse(RESPONSE_GET_METHOD, RESPONSE_BODY);
-            MockResponse mockResponse3 = new MockResponse(RESPONSE_GET_METHOD, RESPONSE_BODY);
+            MockResponse mockResponse1 = MockResponseDataFactory.getDefaultMockResponse();
+            MockResponse mockResponse2 = MockResponseDataFactory.getDefaultMockResponse();
+            MockResponse mockResponse3 = MockResponseDataFactory.getDefaultMockResponse();
 
             HttpCalloutMockException expectedException1 = null;
             HttpCalloutMockException expectedException2 = null;
