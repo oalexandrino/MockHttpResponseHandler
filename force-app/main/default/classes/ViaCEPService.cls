@@ -1,3 +1,7 @@
+/**
+ * This class provides a service for interacting with the ViaCEP API.
+ * @author Olavo Alexandrino <oalexandrino@gmail.com>
+ */
 public class ViaCEPService {
 
     public static final String VIACEP_URL = 'https://viacep.com.br/ws/{CEP}/json/';

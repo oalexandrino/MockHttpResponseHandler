@@ -1,6 +1,7 @@
 /**
  * Base class that covers most simple use cases
  * Implement another version by extending it or a new class that implements IMockResponse, if you need a specialized Mock Response
+ * @author Olavo Alexandrino <oalexandrino@gmail.com>
  */
 public virtual class MockResponse implements IMockResponse{
 

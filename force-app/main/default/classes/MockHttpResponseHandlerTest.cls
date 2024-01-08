@@ -1,3 +1,6 @@
+/**
+ * @author Olavo Alexandrino <oalexandrino@gmail.com>
+ */
 @isTest
 public with sharing class MockHttpResponseHandlerTest 
 {

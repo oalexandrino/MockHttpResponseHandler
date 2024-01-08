@@ -1,3 +1,6 @@
+/**
+ * @author Olavo Alexandrino <oalexandrino@gmail.com>
+ */
 @IsTest
 public with sharing class ChainCEPCallsTest {
     @isTest 

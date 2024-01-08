@@ -1,3 +1,6 @@
+/**
+ * @author Olavo Alexandrino <oalexandrino@gmail.com>
+ */
 public with sharing class ChainCEPCalls 
 {
     /**
