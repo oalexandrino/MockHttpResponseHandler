@@ -5,15 +5,20 @@
  */
 public virtual class MockResponse implements IMockResponse{
 
+    public static final String CONTENT_TYPE_NOT_PROVIDED_MESSAGE = 'HTTPResponse Content-Type is required';
+    public static final String STATUS_CODE_NOT_PROVIDED_MESSAGE = 'HTTPResponse statusCode is required';
+    public static final String STATUS_NOT_PROVIDED_MESSAGE = 'HTTPResponse status is required';
+
     public static final Integer DEFAULT_STATUS_CODE = 200;
     public static final String DEFAULT_STATUS = 'OK';
     public static final String DEFAULT_CONTENT_TYPE = 'application/json';
 
-    private String contentType { get; set;}
-    private Integer statusCode {get; set;}
+    public String contentType { get; set;}
+    public Integer statusCode {get; set;}
+    public String status;
+
     private String body {get; set;}
     private String method;
-    private String status;
     private Map<String, String> headers {get; set;}    
 
     /**
@@ -101,14 +106,15 @@ public virtual class MockResponse implements IMockResponse{
         if(this.body != null){
             res.setBody(this.body);
         }
-
-        res.setHeader('Content-Type', this.contentType);
+        
         res.setStatusCode(this.statusCode);
         res.setStatus(this.status);
 
         for(String key :this.headers.keySet()){
             res.setHeader(key, this.headers.get(key));
         }
+
+        res.setHeader('Content-Type', this.contentType);
 
         return res;
     }
@@ -122,17 +128,17 @@ public virtual class MockResponse implements IMockResponse{
     {
         if (this.contentType == null)
         {
-            throw new HttpCalloutMockException('HTTPRequest Content-Type is required');
+            throw new HttpCalloutMockException(CONTENT_TYPE_NOT_PROVIDED_MESSAGE);
         }
 
         if (this.statusCode == null)
         {
-            throw new HttpCalloutMockException('HTTPRequest statusCode is required');
+            throw new HttpCalloutMockException(STATUS_CODE_NOT_PROVIDED_MESSAGE);
         }
 
         if (this.status == null)
         {
-            throw new HttpCalloutMockException('HTTPRequest status is required');
+            throw new HttpCalloutMockException(STATUS_NOT_PROVIDED_MESSAGE);
         }
     }
 }
