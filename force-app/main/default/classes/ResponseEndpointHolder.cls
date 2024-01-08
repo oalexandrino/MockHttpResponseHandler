@@ -24,7 +24,7 @@ public class ResponseEndpointHolder {
      * @param req The HTTP request for which to generate a mock response.
      * @return The mock HTTP response.
      */
-    public HTTPResponse getMockResponse(HTTPRequest req) {
+    public HTTPResponse respond(HTTPRequest req) {
         HTTPResponse response;
         String method = req.getMethod();
         List<IMockResponse> responses = endpointMethodMap.get(method);
@@ -44,7 +44,7 @@ public class ResponseEndpointHolder {
      * 
      * @param response The mock response to be added.
      */
-    public void addMockResponse(IMockResponse response) {
+    public void addResponse(IMockResponse response) {
         String method = response.getMethod();
         if (method == null) {
             throw new MockHttpHandlerException('Method cannot be null!');

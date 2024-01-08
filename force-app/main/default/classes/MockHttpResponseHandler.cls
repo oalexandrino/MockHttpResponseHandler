@@ -38,7 +38,7 @@ global class MockHttpResponseHandler implements HttpCalloutMock {
             throw new MockHttpHandlerException('No response for endpoint:' + endpoint);
         }
         ResponseEndpointHolder responseHolder = this.responseHolderMap.get(endpoint);
-        return responseHolder.getMockResponse(req);
+        return responseHolder.respond(req);
     }    
 
     /**
@@ -50,7 +50,7 @@ global class MockHttpResponseHandler implements HttpCalloutMock {
     public void addResponse(String endpoint, IMockResponse response){
         endpoint = getEndpointKey(endpoint);
         ResponseEndpointHolder holder = this.getResponseEndpointHolder(endpoint);
-        holder.addMockResponse(response);
+        holder.addResponse(response);
     }
 
     /**
