@@ -3,12 +3,16 @@
  */
 public virtual class SimpleMockResponse implements IMockResponse{
 
-    public String contentType { get; set;}
-    public Integer statusCode {get; set;}
-    public String body {get; set;}
+    public static final Integer DEFAULT_STATUS_CODE = 200;
+    public static final String DEFAULT_STATUS = 'OK';
+    public static final String DEFAULT_CONTENT_TYPE = 'application/json';
+
+    private String contentType { get; set;}
+    private Integer statusCode {get; set;}
+    private String body {get; set;}
     private String method;
     private String status;
-    public Map<String, String> headers {get; set;}    
+    private Map<String, String> headers {get; set;}    
 
     public String getMethod(){
         return method;
@@ -17,41 +21,6 @@ public virtual class SimpleMockResponse implements IMockResponse{
     public void setMethod(String value){
         this.method = value;
     }
-
-    /**
-     * Constructor for creating a SimpleMockResponse object.
-     * 
-     * @param method The HTTP method for which the mock response is being created.
-     * @param body The response body for the mock response.
-     * @param statusCode The HTTP status code for the mock response.
-     * @param status The HTTP status message for the mock response.
-     */
-    public SimpleMockResponse(String method, String body, Integer statusCode, String status){
-        this.headers = new Map<String, String>();
-        this.method = method;
-        this.body   = body;
-        this.statusCode = statusCode;
-        this.status = status;
-        this.contentType = 'application/json';
-        this.headers = headers;
-    }       
-
-    /**
-     * Constructor for creating a SimpleMockResponse object.
-     * 
-     * @param method The HTTP method for the mock response.
-     * @param body The response body for the mock response.
-     * @param statusCode The HTTP status code for the mock response.
-     * @param contentType The content type for the mock response.
-     * @param headers The headers for the mock response.
-     */
-    public SimpleMockResponse(String method, String body, Integer statusCode, String contentType, Map<String, String> headers){
-        this.method = method;
-        this.body   = body;
-        this.statusCode = statusCode;
-        this.contentType = contentType;
-        this.headers = headers;
-    }      
 
     /**
      * Constructor for the SimpleMockResponse class.
@@ -63,9 +32,46 @@ public virtual class SimpleMockResponse implements IMockResponse{
         this.headers = new Map<String, String>();
         this.method = method;
         this.body = body;
-        this.statusCode = 200;
-        this.contentType = 'application/json';
-    }    
+        this.statusCode = DEFAULT_STATUS_CODE;
+        this.status = DEFAULT_STATUS;
+        this.contentType = DEFAULT_CONTENT_TYPE;
+    }      
+
+    /**
+     * Constructor for creating a SimpleMockResponse object.
+     * 
+     * @param method The HTTP method for which the mock response is being created.
+     * @param body The response body for the mock response.
+     * @param statusCode The HTTP status code for the mock response.
+     * @param status The HTTP status message for the mock response.
+     */
+    public SimpleMockResponse(String method, String body, Integer statusCode, String status){
+        this.method = method;
+        this.body   = body;
+        this.statusCode = statusCode;
+        this.status = status;
+        this.contentType = DEFAULT_CONTENT_TYPE;
+        this.headers = new Map<String, String>();
+    }       
+
+    /**
+     * Constructor for creating a SimpleMockResponse object.
+     * 
+     * @param method The HTTP method for the mock response.
+     * @param body The response body for the mock response.
+     * @param statusCode The HTTP status code for the mock response.
+     * @param status The HTTP status message for the mock response.
+     * @param contentType The content type for the mock response.
+     * @param headers The headers for the mock response.
+     */
+    public SimpleMockResponse(String method, String body, Integer statusCode, String status,  String contentType, Map<String, String> headers){
+        this.method = method;
+        this.body   = body;
+        this.statusCode = statusCode;
+        this.status = status;
+        this.contentType = contentType;
+        this.headers = headers;
+    }      
 
     /**
      * Returns the HTTP response for the given HTTP request.

@@ -15,32 +15,41 @@ public class ResponseEndpointHolder {
      */
     private void validateResponses(List<IMockResponse> responses, String method) {
         if (responses == null || responses.isEmpty()) {
-            throw new HttpCalloutMockException('No response for method:' + method);
+            throw new HttpCalloutMockException('No response for method: ' + method);
         }
+    }
+
+    /**
+     * Returns the HTTPResponse object based on the list of mock responses and the HTTPRequest object.
+     * Once a mock is consumed, it will be removed so the next mock in line will run
+     * If there is only 1 mock remaining for any given Endpoint/Method combination, it will not be removed
+     * 
+     * @param responses The list of mock responses.
+     * @param oHTTPRequest The HTTPRequest object.
+     * @return The HTTPResponse object.
+     */
+    private HTTPResponse getResponse(List<IMockResponse> responses, HTTPRequest oHTTPRequest)
+    {
+        return (responses.size() == 1) ? responses[0].getResponse(oHTTPRequest) : responses.remove(0).getResponse(oHTTPRequest);
+
     }
 
     /**
      * Returns a mock HTTP response for the given HTTP request.
      * 
-     * @param req The HTTP request for which to generate a mock response.
+     * @param oHTTPRequest The HTTP request for which to generate a mock response.
      * @return The mock HTTP response.
      */
-    public HTTPResponse respond(HTTPRequest req) {
+    public HTTPResponse respond(HTTPRequest oHTTPRequest) {
         HTTPResponse response;
-        String method = req.getMethod();
-        System.debug('responding the follwing method:' + method);
-        List<IMockResponse> responses = endpointMethodMap.get(method);
-        System.debug('endpointMethodMap.size():' + endpointMethodMap.size());
+
+        System.debug('Method: ' + oHTTPRequest.getMethod());
+
+        List<IMockResponse> responses = endpointMethodMap.get(oHTTPRequest.getMethod());
+        validateResponses(responses, oHTTPRequest.getMethod());
+        response = getResponse(responses, oHTTPRequest);
         
-        validateResponses(responses, method);
-
-        if (responses.size() == 1) {
-            response = responses[0].getResponse(req);
-        } else {
-            response = responses.remove(0).getResponse(req);
-        }
-
-        System.debug('response.getBody():' + response.getBody());
+        System.debug('response.getBody(): ' + response.getBody());
         return response;
     }
 

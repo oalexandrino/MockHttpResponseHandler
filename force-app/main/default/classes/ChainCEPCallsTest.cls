@@ -32,9 +32,12 @@ public with sharing class ChainCEPCallsTest {
 
         List<String> ceps = new List<String>{'01002-020','50030-903', '90010-030'};
 
+        System.debug('asserting items...');
+
         Integer i = 0;
         for (Map<String, Object> item : chainList) 
         {
+            System.debug('------------------------------------------');
             System.assertEquals(ceps[i], item.get('cep'));
             System.debug('item: ' + item.get('cep'));
             System.debug('item: ' + item.get('logradouro'));
@@ -44,7 +47,7 @@ public with sharing class ChainCEPCallsTest {
             System.debug('item: ' + item.get('ibge'));
             System.debug('item: ' + item.get('gia'));
             System.debug('item: ' + item.get('ddd'));
-            System.debug('item: ' + item.get('siafi'));    
+            System.debug('item: ' + item.get('siafi'));   
             i++;
         }
  

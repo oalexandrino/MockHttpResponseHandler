@@ -1,12 +1,5 @@
 /**
  * This is a utility class to help test HTTP callouts.
- * Usage Notes:
- *      - Can handle multiple mocks for each HTTP Method on multiple endpoints
- *      - Once a mock is consumed, it will be removed so the next mock in line will run
- *      - If there is only 1 mock remaining for any given Endpoint/Method combination, it will not be removed
- *      - By default, incoming request will be mapped only using the base URL.  You can change this behavoir if needed by setting this.ignoreQuery to true.
- *      See https://github.com/ChuckJonas/MockHttpResponseHandler for updates.
- *      v1.2
  */
 @isTest
 global class MockHttpResponseHandler implements HttpCalloutMock {
@@ -18,6 +11,8 @@ global class MockHttpResponseHandler implements HttpCalloutMock {
 
     /**
      * @description This causes the ? query params to be ignored when routing responses
+     * By default, incoming request will be mapped only using the base URL.  
+     * You can change this behavoir if needed by setting this.ignoreQuery to true.
      */
     public Boolean ignoreQuery {get; set;}
 
@@ -31,12 +26,12 @@ global class MockHttpResponseHandler implements HttpCalloutMock {
      */
     global HTTPResponse respond(HTTPRequest req) {
         String endpoint = req.getEndpoint();
-        System.debug('MockHttpResponseHandler.respond > endpoint:' + endpoint);
+        System.debug('Responding to the following endpoint: ' + endpoint);
        
         endpoint = getEndpointKey(endpoint);
 
         if(!this.responseHolderMap.containsKey(endpoint)){
-            throw new HttpCalloutMockException('No response for endpoint:' + endpoint);
+            throw new HttpCalloutMockException('No response for endpoint: ' + endpoint);
         }
         ResponseEndpointHolder responseHolder = this.responseHolderMap.get(endpoint);
         return responseHolder.respond(req);
