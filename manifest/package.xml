@@ -5,6 +5,13 @@
         <members>SimpleMockResponse</members>
         <members>ResponseEndpointHolder</members>
         <members>MockHttpHandlerException</members>
+        <members>MockHttpResponseHandler</members>
+        <members>MockHttpResponseHandlerTest</members>
+        <members>ViaCEPService</members>
+        <members>ViaCEPServiceTest</members>
+        <members>ChainCEPCalls</members>
+        <members>ChainCEPCallsTest</members>
+        
         <name>ApexClass</name>
     </types>
     <version>38.0</version>
