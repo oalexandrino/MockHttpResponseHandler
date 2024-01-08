@@ -3,9 +3,12 @@
  * Endpoint Handler is used to store a list of reponses for each HTTP method on an endpoint 
  * @author Olavo Alexandrino <oalexandrino@gmail.com>
  */
-@isTest
 public class ResponseEndpointHolder {
 
+    public static final String METHOD_CANNOT_BE_NULL_MESSAGE = 'Method cannot be null!';
+    public static final String NO_RESPONSE_FOUND_MESSAGE = 'No response for method: {METHOD_NAME}';
+
+    @TestVisible
     private Map<String, List<IMockResponse>> endpointMethodMap = new Map<String, List<IMockResponse>>();
 
     /**
@@ -17,7 +20,7 @@ public class ResponseEndpointHolder {
     @TestVisible
     private void validateResponses(List<IMockResponse> responses, String method) {
         if (responses == null || responses.isEmpty()) {
-            throw new HttpCalloutMockException('No response for method: ' + method);
+            throw new HttpCalloutMockException(NO_RESPONSE_FOUND_MESSAGE.replace('{METHOD_NAME}', method));
         }
     }
 
@@ -64,7 +67,7 @@ public class ResponseEndpointHolder {
     public void addResponse(IMockResponse response) {
         String method = response.getMethod();
         if (method == null) {
-            throw new HttpCalloutMockException('Method cannot be null!');
+            throw new HttpCalloutMockException(METHOD_CANNOT_BE_NULL_MESSAGE);
         }
 
         if (endpointMethodMap.containsKey(method)) {

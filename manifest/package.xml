@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- Base utility package -->
     <types>
         <members>MockResponseDataFactory</members>
+        <members>HttpCalloutMockException</members>        
         <members>IMockResponse</members>
         <members>MockResponse</members>
         <members>MockResponseTest</members>
         <members>ResponseEndpointHolder</members>
-        <members>HttpCalloutMockException</members>
+        <members>ResponseEndpointHolderTest</members>
         <members>MockHttpResponseHandler</members>
         <members>MockHttpResponseHandlerTest</members>
-        <members>ViaCEPService</members>
-        <members>ViaCEPServiceTest</members>
+        <name>ApexClass</name>
+    </types>
+    <!-- Default approach for testing -->
+    <types>
+        <members>ViaCEPService</members> 
+        <members>ViaCEPServiceTest</members> 
+        <name>ApexClass</name>
+    </types>    
+    <!-- Testing using the utility package -->
+    <types>
         <members>ChainCEPCalls</members>
         <members>ChainCEPCallsTest</members>
-        
         <name>ApexClass</name>
     </types>
     <version>38.0</version>
