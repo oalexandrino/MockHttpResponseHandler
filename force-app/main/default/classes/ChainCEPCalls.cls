@@ -2,7 +2,7 @@ public with sharing class ChainCEPCalls
 {
     /**
      * Executes a chain of CEP calls. 
-     * This nested design from the bussiness logic point of view does not seem to be the best approach.
+     * This nested design from the both tech and bussiness logic point of view does not seem to be the best approach.
      * However, it is done only to validade the Apex code, when using nested API calls.
      * @author Olavo Alexandrino <oalexandrino@gmail.com>
      * 
