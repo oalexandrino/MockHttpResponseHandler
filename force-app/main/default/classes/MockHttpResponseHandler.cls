@@ -2,8 +2,9 @@
  * This is a utility class to help test HTTP callouts.
  * @author Olavo Alexandrino <oalexandrino@gmail.com>
  */
-@isTest
 global class MockHttpResponseHandler implements HttpCalloutMock {
+
+    public static final String NO_RESPONSE_FOUND_MESSAGE = 'No response for endpoint: {ENDPOINT}';
 
     /**
      * @description Each endpoint gets a ResponseEndpointHandler that stores a list of responses for each method
@@ -32,7 +33,7 @@ global class MockHttpResponseHandler implements HttpCalloutMock {
         endpoint = getEndpointKey(endpoint);
 
         if(!this.responseHolderMap.containsKey(endpoint)){
-            throw new HttpCalloutMockException('No response for endpoint: ' + endpoint);
+            throw new HttpCalloutMockException(NO_RESPONSE_FOUND_MESSAGE.replace('{ENDPOINT}', endpoint));
         }
         ResponseEndpointHolder responseHolder = this.responseHolderMap.get(endpoint);
         return responseHolder.respond(req);

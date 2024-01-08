@@ -4,32 +4,58 @@
 @isTest
 public with sharing class MockHttpResponseHandlerTest 
 {
+    public static final String ENDPOINT_URL = 'https://endpoint.mockable.io/v1/';
+
     @isTest 
-    static void testSimpleCall() 
+    static void testMockHttpResponseHandler() 
     {
-        String URL_MOCK_SP = 'https://viacep.com.br/ws/'+ViaCEPServiceTest.CEP_SP+'/json/';
-        MockHttpResponseHandler mock = new MockHttpResponseHandler();
-        MockResponse oMockResponse = new MockResponse('GET', ViaCEPServiceTest.MOCK_SP, 200, 'OK');
-        mock.addResponse(URL_MOCK_SP, oMockResponse);
+        MockHttpResponseHandler mockHandler = new MockHttpResponseHandler();
+
+        MockResponse mockResponse = MockResponseDataFactory.getDefaultMockResponse();
+
+        // adding twice the same response to code coverage
+        mockHandler.addResponse(ENDPOINT_URL,  mockResponse);
+        mockHandler.addResponse(ENDPOINT_URL,  mockResponse);
 
         Test.startTest();
 
-            Test.setMock(HttpCalloutMock.class, mock);
-            HttpResponse res = ViaCEPService.query(ViaCEPServiceTest.CEP_SP);
-            Map<String, Object> result = ViaCEPService.format(res);     
+            Test.setMock(HttpCalloutMock.class, mockHandler);
+            String body = sendRequest('GET', ENDPOINT_URL);
+
+            String endPointNotFound = 'https://another-endpoint';
+            Exception endPointNotFoundExeception = null;
+    
+            try {
+                body = sendRequest('GET', endPointNotFound);
+            }
+            catch (Exception ex) {
+                endPointNotFoundExeception = ex;
+            }            
 
         Test.stopTest();
 
-        Map<String, Object> objExpectedResult = (Map<String, Object>) JSON.deserializeUntyped(ViaCEPServiceTest.MOCK_SP);
+        System.assertEquals(
+            MockResponseDataFactory.RESPONSE_BODY, 
+            body, 
+            'The response body should be the same as the mock response body'
+        );
 
-        System.assertEquals(200, res.getStatusCode());
-        System.assertEquals(200, result.get('StatusCode'));
-        System.assertEquals('OK', result.get('Status'));
-        System.assertEquals(objExpectedResult.get('cep'), result.get('cep'));
-        System.assertEquals(objExpectedResult.get('logradouro'), result.get('logradouro'));
-        System.assertEquals(objExpectedResult.get('complemento'), result.get('complemento'));
-        System.assertEquals(objExpectedResult.get('bairro'), result.get('bairro'));
-        System.assertEquals(objExpectedResult.get('localidade'), result.get('localidade'));
-        System.assertEquals(objExpectedResult.get('uf'), result.get('uf'));        
+        String expectedMessage =  MockHttpResponseHandler.NO_RESPONSE_FOUND_MESSAGE.replace('{ENDPOINT}', endPointNotFound.replace('https://', ''));
+
+        System.assertEquals(
+            expectedMessage, 
+            endPointNotFoundExeception.getMessage(), 
+            'Must be: '+ expectedMessage
+        );        
+
     }
+
+    private static String sendRequest(String method, String endpoint){
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(endpoint);
+        req.setMethod(method);
+        Http http = new Http();
+        HttpResponse response = http.send(req);
+        return response.getBody();
+    }    
 }
