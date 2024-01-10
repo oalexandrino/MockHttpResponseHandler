@@ -1,5 +1,6 @@
 /**
  * This is a utility class to help test HTTP callouts.
+ * 
  * @author Olavo Alexandrino <oalexandrino@gmail.com>
  */
 global class MockHttpResponseHandler implements HttpCalloutMock {
